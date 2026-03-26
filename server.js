@@ -1,20 +1,24 @@
 const express = require("express");
 const mysql = require("mysql2");
-const cors = require("cors");
+const cors = require("cors"); // ✅ added
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// connect to MySQL
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root123",
-  database: "testdb"
+// ✅ ONLY ONE DB CONNECTION (use Railway URL)
+const db = mysql.createConnection(process.env.MYSQL_URL);
+
+// connect to DB
+db.connect((err) => {
+  if (err) {
+    console.log("❌ DB ERROR:", err);
+  } else {
+    console.log("✅ Database Connected");
+  }
 });
 
-// when user adds data
+// add data
 app.post("/add", (req, res) => {
   const { name, email } = req.body;
 
@@ -32,7 +36,7 @@ app.post("/add", (req, res) => {
   );
 });
 
-// when we want to get data
+// get data
 app.get("/users", (req, res) => {
   db.query("SELECT * FROM users", (err, result) => {
     if (err) res.send(err);
@@ -40,21 +44,13 @@ app.get("/users", (req, res) => {
   });
 });
 
-// connect to DB first
-db.connect((err) => {
-  if (err) {
-    console.log("❌ DB ERROR:", err);
-  } else {
-    console.log("✅ Database Connected");
-  }
-});
-
-// home route (important for Vercel)
+// home route
 app.get("/", (req, res) => {
-  res.send("Server is running 🚀");
+  res.send("Server is running");
 });
 
 // start server
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
-}); 
+const PORT = process.env.PORT || 5000; // ✅ important for Render
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

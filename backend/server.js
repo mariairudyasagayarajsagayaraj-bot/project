@@ -40,17 +40,21 @@ app.get("/users", (req, res) => {
   });
 });
 
+// connect to DB first
+db.connect((err) => {
+  if (err) {
+    console.log(" DB ERROR:", err);
+  } else {
+    console.log(" Database Connected");
+  }
+});
+
+// home route
+app.get("/", (req, res) => {
+  res.send("Server is running successfully ");
+});
+
 // start server
 app.listen(5000, () => {
   console.log("Server running on port 5000");
-  db.connect((err) => {
-  if (err) {
-    console.log("❌ DB ERROR:", err);
-  } else {
-    console.log("✅ Database Connected");
-  }
-});
-});
-app.get("/", (req, res) => {
-  res.send("Server is running successfully 🚀");
 });

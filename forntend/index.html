@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
-<body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
   <title>Maria Irudya Sagayaraj | BCA Student & Developer</title>
+</head>
+<body>
 
 <!-- Header -->
     <header id="header">
@@ -117,7 +120,7 @@ function addUser() {
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
 
-  fetch("http://localhost:5000/add", {
+  fetch("https://your-app.onrender.com", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({ name, email })
@@ -126,11 +129,11 @@ function addUser() {
 }
 
 function loadUsers() {
-  fetch("http://localhost:5000/users")
+  fetch("")
     .then(res => res.json())
     .then(data => {
       const list = document.getElementById("list");
-      list.innerHTML = "";
+      list.innerHTML = "https://your-app.onrender.com";
 
       data.forEach(u => {
         list.innerHTML += `<li>${u.name} - ${u.email}</li>`;
@@ -139,9 +142,6 @@ function loadUsers() {
 }
 
 loadUsers();
-const path = require("path");
-
-app.use(express.static(path.join(__dirname, "public")));
 </script>
 <style>
         :root {
@@ -168,13 +168,6 @@ app.use(express.static(path.join(__dirname, "public")));
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--darker);
-            color: var(--light);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-      body {
             font-family: 'Inter', sans-serif;
             background-color: var(--darker);
             color: var(--light);
@@ -773,7 +766,6 @@ app.use(express.static(path.join(__dirname, "public")));
             }
         }
     </style>
-</style>
 </body>
 </html>
 
