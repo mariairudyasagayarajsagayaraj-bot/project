@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Tests 
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install   # ✅ FIXED
         working-directory: backend
 
       - name: Run tests
