@@ -122,7 +122,7 @@ function addUser() {
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
 
-  fetch("https://project-i7ss.onrender.com/add", {  // 
+  fetch("https://personal-portfolio-1-xbd6.onrender.com/add", {  // 
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({ name, email })
@@ -134,7 +134,7 @@ function addUser() {
 }
 
 function loadUsers() {
-  fetch("https://project-i7ss.onrender.com/users") // ✅ FIXED
+  fetch("https://personal-portfolio-1-xbd6.onrender.com/users") // ✅ FIXED
     .then(res => res.json())
     .then(data => {
       const list = document.getElementById("list");
